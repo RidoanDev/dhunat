@@ -1,16 +1,32 @@
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home, Bell, Info } from "lucide-react";
+import { Home, Bell, Info, Smartphone } from "lucide-react";
 
 const BottomNavigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const navItems = [
-    { name: "হোম", icon: Home, path: "/" },
-    { name: "আমার অ্যাপ", icon: () => <span className="text-lg">📱</span>, path: "/my-app" },
-    { name: "নোটিফিকেশন", icon: Bell, path: "/notifications" },
-    { name: "আমাদের সম্পর্কে", icon: Info, path: "/about" },
+    { 
+      name: "হোম", 
+      Icon: Home, 
+      path: "/"
+    },
+    { 
+      name: "আমার অ্যাপ", 
+      Icon: Smartphone, 
+      path: "/my-app"
+    },
+    { 
+      name: "নোটিফিকেশন", 
+      Icon: Bell, 
+      path: "/notifications"
+    },
+    { 
+      name: "আমাদের সম্পর্কে", 
+      Icon: Info, 
+      path: "/about"
+    },
   ];
 
   return (
@@ -18,7 +34,7 @@ const BottomNavigation = () => {
       <div className="grid grid-cols-4">
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
-          const IconComponent = item.icon;
+          const IconComponent = item.Icon;
           
           return (
             <button
@@ -30,11 +46,7 @@ const BottomNavigation = () => {
                   : "text-gray-600 hover:text-primary"
               }`}
             >
-              {typeof IconComponent === 'function' ? (
-                <IconComponent />
-              ) : (
-                <IconComponent className="h-5 w-5" />
-              )}
+              <IconComponent className="h-6 w-6" />
               <span className="text-xs mt-1 leading-tight">{item.name}</span>
             </button>
           );
